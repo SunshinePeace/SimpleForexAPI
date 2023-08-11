@@ -34,7 +34,7 @@ export default function Home() {
         // Task 1.5: Updating the Previous State
         setforex(result);
         
-        // Task 2: New Variable With Modified Forex
+        // Task 2: New Variable With Modified Forex Rate
         const modifiedForexRates: Record<string, number> = {};
         const newRate = 10.0002;
         for (let currency in result.rates){
@@ -59,7 +59,7 @@ export default function Home() {
       return false;
     }
   } 
-  
+
   return (
 
       <section className="min-h-screen bg-black text-white font-sans flex flex-col justify-center items-center">
