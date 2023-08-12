@@ -63,13 +63,14 @@ export default function Home() {
 
   }, []);
 
-  const isEven = (forexRate: number) => {
+  const isEven = (forexRate: number):boolean => {
 
-    const digit_length = forexRate.toString().length;
-    if (parseFloat(forexRate.toFixed(digit_length).replace('.','')) % 2 === 0) {
+    const forexRateString = forexRate.toString().replace('.','');
+
+    const finalRate = parseInt(forexRateString, 30);
+    if ( finalRate % 2 === 0) {
       return true;
     }
-
     else{
       return false;
     }
@@ -103,9 +104,9 @@ export default function Home() {
               {forex && Object.entries(forex.rates).map(([currency, value], index) => (
                 <tr key={currency} className={`hover:bg-gray-800 transition duration-300 ${index % 2 === 0 ? "bg-gray-850" : "bg-gray-900"}`}>
                   <td className="whitespace-nowrap px-4 py-2">{index + 1}</td>
-                  <td className={`whitespace-nowrap px-4 py-2 ${currency === 'HKD' ? 'border-red-500 border-l-4' : ''}`}>{currency}</td>
-                  <td className={`whitespace-nowrap px-4 py-2 ${isEven(value) ? 'border-red-500 border-l-4' : ''}`}>{value}</td>
-                  <td className={`whitespace-nowrap px-4 py-2 ${modifiedForex && isEven(modifiedForex[currency]) ? 'border-red-500 border-l-4' : ''}`}>{modifiedForex ? modifiedForex[currency] : 'Loading...'}</td>
+                  <td className={`whitespace-nowrap px-4 py-2 ${currency === 'HKD' ? 'border-red-500 border-2' : ''}`}>{currency}</td>
+                  <td className={`whitespace-nowrap px-4 py-2 ${isEven(value) ? 'border-red-500 border-2' : ''}`}>{value}</td>
+                  <td className={`whitespace-nowrap px-4 py-2 ${modifiedForex && isEven(modifiedForex[currency]) ? 'border-red-500 border-2' : ''}`}>{modifiedForex ? modifiedForex[currency] : 'Loading...'}</td>
                 </tr>
               ))}
             </tbody>
