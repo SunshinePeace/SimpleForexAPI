@@ -47,7 +47,20 @@ export default function Home() {
         console.error('Error fetching data:', error);
       }
     };
+
     fetchData();
+    // Set Up Interval 
+    const innerLoop = setInterval(() => {
+      fetchData();
+      console.log("Fetched");
+    }, 10000 ); // For Every 10 seconds
+
+    // Cleanup Function
+
+    return () => {
+      clearInterval(innerLoop);
+    }
+
   }, []);
 
   const isEven = (forexRate: number) => {
