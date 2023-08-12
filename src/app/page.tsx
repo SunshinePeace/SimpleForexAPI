@@ -24,7 +24,7 @@ export default function Home() {
         const response = await fetch('https://api.apilayer.com/fixer/latest', {
           method: 'GET',
           headers: {
-            'apikey': '9sOx2d1gWYZrKY0uD4hCbOMIQzLcL4KQ',
+            'apikey': 'RtWGH6oLtDb3lc0eN8IA4BWLDbaW2a8T',
           },
         });
 
@@ -49,11 +49,11 @@ export default function Home() {
     };
 
     fetchData();
+
     // Set Up Interval 
     const innerLoop = setInterval(() => {
       fetchData();
-      console.log("Fetched");
-    }, 10000 ); // For Every 10 seconds
+    }, 3600000 ); // For Every 1 Hours Due To Free Version
 
     // Cleanup Function
 
@@ -64,7 +64,9 @@ export default function Home() {
   }, []);
 
   const isEven = (forexRate: number) => {
-    if (parseFloat(forexRate.toFixed(6).replace('.','')) % 2 === 0) {
+
+    const digit_length = forexRate.toString().length;
+    if (parseFloat(forexRate.toFixed(digit_length).replace('.','')) % 2 === 0) {
       return true;
     }
 
@@ -73,6 +75,15 @@ export default function Home() {
     }
   } 
 
+  if (!forex) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <div>Loading ... </div>
+      </div>
+
+    )
+  }
   return (
 
       <section className="min-h-screen bg-black text-white font-sans flex flex-col justify-center items-center">
